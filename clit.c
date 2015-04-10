@@ -16,13 +16,13 @@ int get_num(){
     return phone_number;
 }
 
-char *get_message(){
+char get_message(){
     //grab the message that the user wants to send
-    char *message;
+    char mess[50];
     printf("Please enter the message you wish to send: ");
-    scanf("%s",message);
+    scanf("%s",mess);
     getchar();
-    return message;
+    return mess;
 }
 
 int varify_phone_number(int phone_number){
@@ -52,8 +52,10 @@ int request(int phone_number, char *text_message){
 
     if(curl){
         curl_easy_setopt(curl, CURLOPT_URL,"http://textbelt.com/text");
-        curl_easy_setopt(curl,CURLOPT_POSTFIELDS,("number=%i",phone_number));
-        curl_easy_setopt(curl,CURLOPT_POSTFIELDS,("message=%s",text_message));
+        //curl_easy_setopt(curl,CURLOPT_POSTFIELDS,("number=%i",phone_number));
+        //curl_easy_setopt(curl,CURLOPT_POSTFIELDS,("message=%s",text_message));
+        curl_easy_setopt(curl,CURLOPT_POSTFIELDS,"number=7342395992");
+        curl_easy_setopt(curl,CURLOPT_POSTFIELDS,"message=this is just a test");
         curl_easy_setopt(curl,CURLOPT_FOLLOWLOCATION,1l);//follow redirection if redirected
         //preform the actual request
         res = curl_easy_perform(curl);
@@ -75,6 +77,8 @@ int main(){
     phone_number = get_num();
     text_message = get_message();
 
+    printf("%s",text_message);
+/*
     switch(varify_phone_number(phone_number)){
         case 1:
             request(phone_number,text_message);
@@ -83,9 +87,9 @@ int main(){
         case 0:
             message = "Sorry, that is not a valid phone number, we can not send a text to that number.";
             break;
-    }         
+    }*/         
 
-    res_message(message,phone_number);
+    //res_message(message,phone_number);
 
     return 0;
 }
