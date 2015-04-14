@@ -7,39 +7,34 @@
 #include <stdio.h>
 #include <curl/curl.h>
 
-int get_num(){
+char * get_num(){
     //grab the phone number we want to text
-    int phone_number;
+    //number has to be represented as a string
+    char phone_number[10];
     printf("Please enter the 10 digit number you wish to text, no spaces or special characters: ");
-    scanf("%d", &phone_number);
-    getchar();
-    return phone_number;
+    return fgets(phone_number,10,stdin);
 }
 
-char get_message(){
+char * get_message(){
     //grab the message that the user wants to send
-    char mess[50];
-    printf("Please enter the message you wish to send: ");
-    scanf("%s",mess);
-    getchar();
-    return mess;
+    char mess[140];
+    printf("Please enter the message you wish to send, no more than 140 characters: ");
+    return fgets(mess,140,stdin);
 }
 
 int varify_phone_number(int phone_number){
     int res;
-    
     if(phone_number < 1000000000 || phone_number > 9999999999){
         res = 0;//it's not really a phone number 
     }else{
         res = 1; 
     }
-
     return res;
 }
 
-int res_message(char *message, int phone_number) {
+int res_message(char * message, char * phone_number) {
     //give the user a response message
-    printf("%s: %i\n", message, phone_number);
+    printf("%s: %s\n", message, phone_number);
     return 0;
 }
 
@@ -70,16 +65,14 @@ int request(int phone_number, char *text_message){
 
 int main(){
 
-    int phone_number;
-    char *message;
-    char *text_message;
+    char * phone_number;
+    char * message;
+    char * text_message;
 
     phone_number = get_num();
     text_message = get_message();
 
-    printf("%s",text_message);
-/*
-    switch(varify_phone_number(phone_number)){
+    /*switch(varify_phone_number(phone_number)){
         case 1:
             request(phone_number,text_message);
             message = "Thanks, message was sent to: ";
@@ -87,9 +80,12 @@ int main(){
         case 0:
             message = "Sorry, that is not a valid phone number, we can not send a text to that number.";
             break;
-    }*/         
+    }*/
 
-    //res_message(message,phone_number);
+    message = "just a test";
+
+    printf("called from main: %s\n",phone_number);
+    res_message(message,phone_number);
 
     return 0;
 }
