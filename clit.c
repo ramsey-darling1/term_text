@@ -8,8 +8,8 @@
 #include <curl/curl.h>
 
 struct text_message {
-    char phone_number[10];
-    char message[140];
+    char phone_number[12];
+    char message[141];
 
 };
 
@@ -18,7 +18,7 @@ char * get_num(char * phone_number){
     //number has to be represented as a string
     printf("Please enter the 10 digit number you wish to text, no spaces or special characters: ");
     getchar();
-    fgets(phone_number,10,stdin);
+    fgets(phone_number,11,stdin);
     return phone_number;
 }
 
