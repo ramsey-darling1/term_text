@@ -17,11 +17,11 @@ void get_num(char * phone_number){
     //grab the phone number we want to text
     //number has to be represented as a string
     printf("Please enter the 10 digit number you wish to text, no spaces or special characters: ");
-    getchar();
+    //getchar();
     fgets(phone_number,11,stdin);
 }
 
-void* get_text_message(char * text_message){
+void get_text_message(char * text_message){
     //grab the message that the user wants to send
     printf("Please enter the message you wish to send, no more than 140 characters: ");
     getchar();
