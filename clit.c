@@ -18,14 +18,14 @@ void get_num(char * phone_number){
     //number has to be represented as a string
     printf("Please enter the 10 digit number you wish to text, no spaces or special characters: ");
     //getchar();
-    fgets(phone_number,11,stdin);
+    fgets(phone_number,12,stdin);
 }
 
 void get_text_message(char * text_message){
     //grab the message that the user wants to send
     printf("Please enter the message you wish to send, no more than 140 characters: ");
-    getchar();
-    fgets(text_message,141,stdin);
+    //getchar();
+    fgets(text_message,142,stdin);
 }
 
 void res_message(char * message, char * phone_number) {
@@ -44,8 +44,6 @@ int request(char * phone_number, char * text_message){
         curl_easy_setopt(curl, CURLOPT_URL,"http://textbelt.com/text");
         curl_easy_setopt(curl,CURLOPT_POSTFIELDS,("number=%s",phone_number));
         curl_easy_setopt(curl,CURLOPT_POSTFIELDS,("message=%s",text_message));
-        //curl_easy_setopt(curl,CURLOPT_POSTFIELDS,"number=7342395992");
-        //curl_easy_setopt(curl,CURLOPT_POSTFIELDS,"message=this is just a test");
         curl_easy_setopt(curl,CURLOPT_FOLLOWLOCATION,1l);//follow redirection if redirected
         //preform the actual request
         res = curl_easy_perform(curl);
@@ -66,7 +64,7 @@ void main(){
     get_num(active.phone_number);
     get_text_message(active.message);
 
-    //request(active.phone_number,active.message);
+    request(active.phone_number,active.message);
 
     //response_message = "just a test";
 
