@@ -9,31 +9,28 @@
 
 struct text_message {
     char phone_number[12];
-    char message[141];
+    char message[142];
 
 };
 
-char * get_num(char * phone_number){
+void get_num(char * phone_number){
     //grab the phone number we want to text
     //number has to be represented as a string
     printf("Please enter the 10 digit number you wish to text, no spaces or special characters: ");
     getchar();
     fgets(phone_number,11,stdin);
-    return phone_number;
 }
 
-char * get_text_message(char * text_message){
+void* get_text_message(char * text_message){
     //grab the message that the user wants to send
     printf("Please enter the message you wish to send, no more than 140 characters: ");
     getchar();
-    fgets(text_message,140,stdin);
-    return text_message;
+    fgets(text_message,141,stdin);
 }
 
-int res_message(char * message, char * phone_number) {
+void res_message(char * message, char * phone_number) {
     //give the user a response message
     printf("%s: %s\n", message, phone_number);
-    return 0;
 }
 
 int request(char * phone_number, char * text_message){
@@ -61,7 +58,7 @@ int request(char * phone_number, char * text_message){
     return result;
 }
 
-int main(){
+void main(){
 
     struct text_message active;
     //char * response_message;
@@ -75,8 +72,6 @@ int main(){
 
     printf("called from main: %s, %s\n",active.phone_number,active.message);
     //res_message(message,phone_number);
-
-    return 0;
 }
 
 
