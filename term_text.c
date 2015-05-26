@@ -28,7 +28,7 @@ void get_text_message(char * text_message){
 
 void res_message(char * message, char * phone_number) {
     //give the user a response message
-    printf("%s: %s\n", message, phone_number);
+    printf("Tried to send this message: %s, to this phone number: %s\n", message, phone_number);
 }
 
 int request(char * phone_number, char * text_message){
@@ -37,8 +37,7 @@ int request(char * phone_number, char * text_message){
     int result;
 
     curl = curl_easy_init();
-    phone_number[10] = 0;
-    printf("called from request %s",phone_number);
+    phone_number[10] = 0;//remove the new line character
     if(curl){
         curl_easy_setopt(curl, CURLOPT_URL,"http://textbelt.com/text");
         curl_easy_setopt(curl,CURLOPT_POSTFIELDS,("number=%s",phone_number));
@@ -56,17 +55,12 @@ int request(char * phone_number, char * text_message){
 }
 
 void main(){
-
     struct text_message active;
-    //char * response_message;
-
-    get_num(active.phone_number);
-    get_text_message(active.message);
-
-    request(active.phone_number,active.message);
-
+    get_num(active.phone_number);//grab the phone number from the user
+    get_text_message(active.message);//grab the text message to send from the user
+    request(active.phone_number,active.message);//send the text message to the number
     //printf("called from main: %s, %s\n",active.phone_number,active.message);
-    //res_message(message,phone_number);
+    res_message(active.message,active.phone_number);//give the user a response message
 }
 
 
